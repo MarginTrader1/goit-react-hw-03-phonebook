@@ -8,7 +8,7 @@ export const ContactsList = ({ list }) => {
           <p>
             {item.name}: {item.number}
           </p>
-          <Button>Delete</Button>
+          <Button type="button">Delete</Button>
         </Li>
       ))}
     </Ul>
