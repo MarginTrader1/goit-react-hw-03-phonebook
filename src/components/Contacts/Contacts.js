@@ -1,6 +1,7 @@
-import { Li, Button, Ul } from "./Contacts.styled";
+import { Li, Button, Ul } from './Contacts.styled';
 
-export const ContactsList = ({ list }) => {
+export const ContactsList = ({ list,  deleteContact }) => {
+
   return (
     <Ul>
       {list.contacts.map(item => (
@@ -8,7 +9,9 @@ export const ContactsList = ({ list }) => {
           <p>
             {item.name}: {item.number}
           </p>
-          <Button type="button">Delete</Button>
+          <Button type="button" onClick={() => deleteContact(item.id)}>
+            Delete
+          </Button>
         </Li>
       ))}
     </Ul>

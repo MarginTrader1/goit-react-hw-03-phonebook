@@ -16,15 +16,31 @@ export class App extends Component {
     number: '',
   };
 
+  addContact = newContact => {
+    this.setState(prevState => {
+      return {
+        contacts: [...prevState.contacts, newContact],
+      };
+    });
+  };
+
+  deleteContact = id => {
+    this.setState(prevState => {
+      return {
+        contacts: prevState.contacts.filter(item => item.id !== id),
+      };
+    });
+  };
+
   render() {
     return (
       <div>
         <h1>Phonebook</h1>
-        <ContactForm />
+        <ContactForm addContact={this.addContact} />
 
         <h2>Contacts</h2>
         {/* <Filter /> */}
-          <ContactsList list={this.state}/> 
+        <ContactsList list={this.state} deleteContact={this.deleteContact} />
       </div>
     );
   }
