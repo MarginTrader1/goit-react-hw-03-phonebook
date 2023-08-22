@@ -27,11 +27,10 @@ export const ContactForm = ({ addContact }) => {
       }}
       validationSchema={SignupSchema}
       onSubmit={(values, actions) => {
-
         // submit формы ввода возвращает объект values, который мы распыляем в новый объект и добавляем сгенерированное id
         addContact({ ...values, id: nanoid() });
 
-        //ресет формы 
+        //ресет формы
         actions.resetForm();
       }}
     >
@@ -44,7 +43,14 @@ export const ContactForm = ({ addContact }) => {
 
         <label>
           Number
-          <StyledField name="number" placeholder="111-11-11" />
+          <StyledField
+            type="tel"
+            name="number"
+            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+            placeholder="111-11-11"
+            required
+          />
           <StyledError name="number" component="div" />
         </label>
 
