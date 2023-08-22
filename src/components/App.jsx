@@ -11,36 +11,44 @@ export class App extends Component {
       { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
       { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+      { id: 'id-5', name: 'Rosie Eden', number: '555-00-26' },
+      { id: 'id-6', name: 'Clement Young', number: '344-01-46' },
     ],
     filter: '',
   };
 
-  // метод добавления контакта - из компонента ContactForm возвращает submit формы ввиде объекта newContact
+  // метод добавления контакта - из компонента ContactForm возвращается submit формы ввиде объекта newContact
   addContact = newContact => {
     this.setState(prevState => {
-      // через метод some() проверяем, есть ли в массиве такое имя -> возвращает true/false
+      
+      // через метод some() проверяем, есть ли в массиве объектов такое имя -> возвращает true/false
       let existWord = prevState.contacts.some(
         object => object.name === newContact.name
       );
-
+      // если true -> используем паттерн "ранее возвращение" (return после алерта)
       if (existWord) {
         alert(`${newContact.name} is already in contacts.`);
         return;
       }
+
+      // если false - добавляем новый объект в массив объектов, а именно распыляем старый массив объектов и добавляем новый объект в массив
       return {
         contacts: [...prevState.contacts, newContact],
       };
     });
   };
 
+  // метод удаления контакта - из компонента ContactList возвращается id елемента.
   deleteContact = id => {
     this.setState(prevState => {
       return {
+        // фильтруем массив объектов по id -> возвращаем массив без объекта с таким id
         contacts: prevState.contacts.filter(item => item.id !== id),
       };
     });
   };
 
+  // метод добавления фильтра - из компонента Filter возвращается значение инпута в value
   addFilter = value => {
     this.setState(prevState => {
       return {
@@ -50,6 +58,8 @@ export class App extends Component {
   };
 
   render() {
+
+    // создаем новый массив, отфильтрованный по значению filter, который передаем пропсом в компонент ContactsList
     const filteredList = this.state.contacts.filter(item =>
       item.name.toLowerCase().includes(this.state.filter.toLowerCase())
     );

@@ -1,8 +1,12 @@
+// используем библиотеку Formik для заполнения форм ввода
 import { Formik } from 'formik';
 import { StyledForm, StyledField, StyledError } from './ContactForm.styled';
 import * as Yup from 'yup';
+
+// используем библиотеку Nanoid для генерации случайного id
 import { nanoid } from 'nanoid';
 
+// валидация формы через библиотеку Yup
 const SignupSchema = Yup.object().shape({
   name: Yup.string()
     .min(2, 'Too Short!')
@@ -23,7 +27,11 @@ export const ContactForm = ({ addContact }) => {
       }}
       validationSchema={SignupSchema}
       onSubmit={(values, actions) => {
+
+        // submit формы ввода возвращает объект values, который мы распыляем в новый объект и добавляем сгенерированное id
         addContact({ ...values, id: nanoid() });
+
+        //ресет формы 
         actions.resetForm();
       }}
     >

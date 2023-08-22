@@ -8,6 +8,7 @@ export const ContactsList = ({ list, deleteContact }) => {
           <p>
             {item.name}: {item.number}
           </p>
+          {/* в событие onClick передаем ссылку на анонимную функцию и вызываем метод deleteContact чтобы передать аргумент id в App  */}
           <Button type="button" onClick={() => deleteContact(item.id)}>
             Delete
           </Button>
