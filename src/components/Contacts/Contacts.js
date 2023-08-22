@@ -1,10 +1,9 @@
 import { Li, Button, Ul } from './Contacts.styled';
 
-export const ContactsList = ({ list,  deleteContact }) => {
-
+export const ContactsList = ({ list, deleteContact }) => {
   return (
     <Ul>
-      {list.contacts.map(item => (
+      {list.map(item => (
         <Li key={item.id}>
           <p>
             {item.name}: {item.number}

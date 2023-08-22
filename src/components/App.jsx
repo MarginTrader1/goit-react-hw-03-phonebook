@@ -13,12 +13,20 @@ export class App extends Component {
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
     filter: '',
-    name: '',
-    number: '',
   };
 
+  // метод добавления контакта - из компонента ContactForm возвращает submit формы ввиде объекта newContact
   addContact = newContact => {
     this.setState(prevState => {
+      // через метод some() проверяем, есть ли в массиве такое имя -> возвращает true/false
+      let existWord = prevState.contacts.some(
+        object => object.name === newContact.name
+      );
+
+      if (existWord) {
+        alert(`${newContact.name} is already in contacts.`);
+        return;
+      }
       return {
         contacts: [...prevState.contacts, newContact],
       };
@@ -33,15 +41,27 @@ export class App extends Component {
     });
   };
 
+  addFilter = value => {
+    this.setState(prevState => {
+      return {
+        filter: value,
+      };
+    });
+  };
+
   render() {
+    const filteredList = this.state.contacts.filter(item =>
+      item.name.toLowerCase().includes(this.state.filter.toLowerCase())
+    );
+
     return (
       <div>
         <h1>Phonebook</h1>
         <ContactForm addContact={this.addContact} />
 
         <h2>Contacts</h2>
-        <Filter />
-        <ContactsList list={this.state} deleteContact={this.deleteContact} />
+        <Filter addFilter={this.addFilter} />
+        <ContactsList list={filteredList} deleteContact={this.deleteContact} />
       </div>
     );
   }
