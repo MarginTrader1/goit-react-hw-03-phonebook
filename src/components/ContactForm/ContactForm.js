@@ -23,7 +23,7 @@ export const ContactForm = ({ addContact }) => {
       }}
       validationSchema={SignupSchema}
       onSubmit={(values, actions) => {
-        addContact({...values, id: nanoid()});
+        addContact({ ...values, id: nanoid() });
         actions.resetForm();
       }}
     >

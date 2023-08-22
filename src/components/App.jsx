@@ -1,7 +1,8 @@
 import { Component } from 'react';
 
 import { ContactsList } from './Contacts/Contacts';
-import { ContactForm } from './Contacts/ContactForm/ContactForm';
+import { ContactForm } from './ContactForm/ContactForm';
+import { Filter } from './Filter/Filter';
 
 export class App extends Component {
   state = {
@@ -39,7 +40,7 @@ export class App extends Component {
         <ContactForm addContact={this.addContact} />
 
         <h2>Contacts</h2>
-        {/* <Filter /> */}
+        <Filter />
         <ContactsList list={this.state} deleteContact={this.deleteContact} />
       </div>
     );
