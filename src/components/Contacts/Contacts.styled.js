@@ -13,9 +13,13 @@ export const Li = styled.li`
 `;
 
 export const Button = styled.button`
-    min-width: 100px;
-    height: 20px;
-    border-radius: 8px;
-    background-color: #3f51b51a;
-    cursor: pointer;
-`
+  min-width: 100px;
+  height: 20px;
+  border-radius: 8px;
+  background-color: #3f51b51a;
+  cursor: pointer;
+`;
+
+export const P = styled.p`
+  min-width: 200px;
+`;
