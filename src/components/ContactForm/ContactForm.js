@@ -1,6 +1,6 @@
 // используем библиотеку Formik для заполнения форм ввода
 import { Formik } from 'formik';
-import { StyledForm, StyledField, StyledError, Button } from './ContactForm.styled';
+import { StyledForm, StyledField, StyledError, Button, Span } from './ContactForm.styled';
 import * as Yup from 'yup';
 
 // используем библиотеку Nanoid для генерации случайного id
@@ -45,13 +45,13 @@ export const ContactForm = ({ addContact }) => {
     >
       <StyledForm>
         <label>
-          Name
+          <Span>Name</Span>
           <StyledField name="name" placeholder="Jane Doe" />
           <StyledError name="name" component="div" />
         </label>
 
         <label>
-          Number
+        <Span>Number</Span>
           <StyledField
             type="tel"
             name="number"

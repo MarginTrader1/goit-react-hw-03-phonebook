@@ -32,3 +32,11 @@ export const Button = styled.button`
   background-color: #3f51b51a;
   cursor: pointer;
 `;
+
+export const Span = styled.span`
+  display: flex;
+  align-items: center;
+  width: 50px;
+ 
+
+`;
