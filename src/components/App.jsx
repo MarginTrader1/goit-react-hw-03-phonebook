@@ -20,7 +20,6 @@ export class App extends Component {
   // метод добавления контакта - из компонента ContactForm возвращается submit формы ввиде объекта newContact
   addContact = newContact => {
     this.setState(prevState => {
-      
       // через метод some() проверяем, есть ли в массиве объектов такое имя -> возвращает true/false
       let existWord = prevState.contacts.some(
         object => object.name === newContact.name
@@ -58,14 +57,20 @@ export class App extends Component {
   };
 
   render() {
-
     // создаем новый массив, отфильтрованный по значению filter, который передаем пропсом в компонент ContactsList
     const filteredList = this.state.contacts.filter(item =>
       item.name.toLowerCase().includes(this.state.filter.toLowerCase())
     );
 
     return (
-      <div>
+      <div
+        style={{
+          display: 'block',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          width: '500px',
+        }}
+      >
         <h1>Phonebook</h1>
         <ContactForm addContact={this.addContact} />
 

@@ -1,6 +1,6 @@
 // используем библиотеку Formik для заполнения форм ввода
 import { Formik } from 'formik';
-import { StyledForm, StyledField, StyledError } from './ContactForm.styled';
+import { StyledForm, StyledField, StyledError, Button } from './ContactForm.styled';
 import * as Yup from 'yup';
 
 // используем библиотеку Nanoid для генерации случайного id
@@ -11,7 +11,7 @@ const phoneRegExp =
   /^\+?\d{1,4}?[ .-]?(\(\d{1,3}\))?([ .-]?\d{1,4}){1,4}([ .-]?\d{1,9})?$/;
 
 // паттерн для проверки имени
-const nameRexExp =
+const nameRegExp =
   "^[a-zA-Zа-яА-Я]+(([' \\-][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$";
 
 // валидация формы через библиотеку Yup
@@ -19,7 +19,7 @@ const SignupSchema = Yup.object().shape({
   name: Yup.string()
     .min(7, 'Too Short!')
     .max(50, 'Too Long!')
-    .matches(nameRexExp, 'Неверный ввод')
+    .matches(nameRegExp, 'Неверный ввод')
     .required('Заполните поле'),
   number: Yup.string()
     .min(7, 'Too Short!')
@@ -61,7 +61,7 @@ export const ContactForm = ({ addContact }) => {
           <StyledError name="number" component="div" />
         </label>
 
-        <button type="submit">Submit</button>
+        <Button type="submit">Добавить контакт</Button>
       </StyledForm>
     </Formik>
   );
