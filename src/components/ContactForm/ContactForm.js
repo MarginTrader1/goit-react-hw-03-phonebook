@@ -17,7 +17,7 @@ const nameRegExp =
 // валидация формы через библиотеку Yup
 const SignupSchema = Yup.object().shape({
   name: Yup.string()
-    .min(7, 'Too Short!')
+    .min(2, 'Too Short!')
     .max(50, 'Too Long!')
     .matches(nameRegExp, 'Неверный ввод')
     .required('Заполните поле'),
