@@ -1,6 +1,12 @@
 // используем библиотеку Formik для заполнения форм ввода
 import { Formik } from 'formik';
-import { StyledForm, StyledField, StyledError, Button, Span } from './ContactForm.styled';
+import {
+  StyledForm,
+  StyledField,
+  StyledError,
+  Button,
+  Span,
+} from './ContactForm.styled';
 import * as Yup from 'yup';
 
 // используем библиотеку Nanoid для генерации случайного id
@@ -27,7 +33,7 @@ const SignupSchema = Yup.object().shape({
     .required('Заполните поле'),
 });
 
-export const ContactForm = ({ addContact }) => {
+export const ContactForm = ({ addContact, defaltState }) => {
   return (
     <Formik
       initialValues={{
@@ -51,7 +57,7 @@ export const ContactForm = ({ addContact }) => {
         </label>
 
         <label>
-        <Span>Number</Span>
+          <Span>Number</Span>
           <StyledField
             type="tel"
             name="number"
@@ -62,6 +68,7 @@ export const ContactForm = ({ addContact }) => {
         </label>
 
         <Button type="submit">Добавить контакт</Button>
+        <Button type="button" onClick={defaltState}>Defalt Settings</Button>
       </StyledForm>
     </Formik>
   );

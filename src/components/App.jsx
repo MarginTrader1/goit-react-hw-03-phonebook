@@ -4,18 +4,40 @@ import { ContactsList } from './Contacts/Contacts';
 import { ContactForm } from './ContactForm/ContactForm';
 import { Filter } from './Filter/Filter';
 
+const defaltState = [
+  { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+  { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+  { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+  { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+  { id: 'id-5', name: 'Rosie Eden', number: '555-00-26' },
+  { id: 'id-6', name: 'Clement Young', number: '344-01-46' },
+];
+
 export class App extends Component {
   state = {
-    contacts: [
-      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-      { id: 'id-5', name: 'Rosie Eden', number: '555-00-26' },
-      { id: 'id-6', name: 'Clement Young', number: '344-01-46' },
-    ],
+    contacts: defaltState,
     filter: '',
   };
+
+  // данные из localStorage записываем в State 
+  componentDidMount() {
+    this.setState(prevState => {
+      const localData = localStorage.getItem('contacts');
+
+      if (localData !== null) {
+        return {
+          contacts: JSON.parse(localData),
+        };
+      }
+    });
+  }
+
+  // добавляем данные в localStorage
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.contacts !== this.state.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
+  }
 
   // метод добавления контакта - из компонента ContactForm возвращается submit формы ввиде объекта newContact
   addContact = newContact => {
@@ -56,6 +78,15 @@ export class App extends Component {
     });
   };
 
+  // метод сброса списка контактов до дифолтного значения 
+  addDefaltState = () => {
+    this.setState(prevState => {
+      return {
+        contacts: defaltState,
+      };
+    });
+  };
+
   render() {
     // создаем новый массив, отфильтрованный по значению filter, который передаем пропсом в компонент ContactsList
     const filteredList = this.state.contacts.filter(item =>
@@ -72,7 +103,10 @@ export class App extends Component {
         }}
       >
         <h1>Phonebook</h1>
-        <ContactForm addContact={this.addContact} />
+        <ContactForm
+          addContact={this.addContact}
+          defaltState={this.addDefaltState}
+        />
 
         <h2>Contacts</h2>
         <Filter addFilter={this.addFilter} />
