@@ -17,4 +17,3 @@ export const ContactsList = ({ list, deleteContact }) => {
     </Ul>
   );
 };
-
